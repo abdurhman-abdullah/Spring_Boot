@@ -47,19 +47,22 @@ public class TrackerSystemController {
         return new MessageResponse("Success");
     }
 
-    @PutMapping("/changeStatus")
-    public MessageResponse changeStatus(){
-
+    @PutMapping("/changeStatus/{id}")
+    public MessageResponse changeStatus(@PathVariable int id){
         for(int i = 0; i < trackerSystems.size(); i++) {
-            String check = trackerSystems.get(i).getStatus().toLowerCase();
-            if(check.equals("not done")){
-                trackerSystems.get(i).setStatus("done");
-                trackerSystems.set(i, trackerSystems.get(i));
-            }else {
-                trackerSystems.get(i).setStatus("not done");
-                trackerSystems.set(i, trackerSystems.get(i));
-            }
+            if (trackerSystems.get(i).getId() == id) {
+                String check = trackerSystems.get(i).getStatus().toLowerCase();
+                if (check.equals("not done")) {
+                    trackerSystems.get(i).setStatus("done");
+                    trackerSystems.set(i, trackerSystems.get(i));
+                } else {
+                    trackerSystems.get(i).setStatus("not done");
+                    trackerSystems.set(i, trackerSystems.get(i));
+                }
 
+            }else {
+                continue;
+            }
         }
 
         return new MessageResponse("Success");

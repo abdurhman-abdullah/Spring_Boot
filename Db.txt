@@ -1,0 +1,68 @@
+create database store;
+
+Create table countries(
+code int, 
+name varchar(20) not null
+constraint code_pk Primary key(code),
+constraint name_uni Unique(name)
+);
+
+Create table users(
+id int, 
+fullName varchar(20),
+email varchar(20),
+gender char(1) check (gender = 'm' or gender = 'f'),
+date_of_birth varchar(20),
+created_at datetime DEFAULT (getdate()),
+country_code int,
+constraint id_pk Primary key(id),
+constraint email_uni Unique(email),
+Constraint country_code_fk foreign key(country_code) references countries
+);
+
+Create table orders(
+id int, 
+user_id int,
+status varchar(6) check(status = 'start' or status = 'finish'),
+created_at datetime DEFAULT GETDATE(),
+
+constraint id_order_pk Primary key(id),
+constraint user_id_fk foreign key (user_id) references users
+);
+
+Create table products(
+id int,
+name varchar(10) not null,
+price int default 0,
+status varchar(10) check(status = 'valid' or status = 'expired'),
+created_at datetime DEFAULT GETDATE(),
+constraint id_product_pk Primary key(id),
+
+);
+
+Create table order_products(
+order_id int,
+produact_id int,
+quantity int default 0,
+constraint order_fk foreign key (order_id) references orders,
+constraint products_fk foreign key (order_id) references products,
+);
+
+insert into countries(code, name) values (1 , 'Abha');
+insert into users(id, fullName, email, gender, date_of_birth, country_code) 
+values (1 , 'Abdulrahman Alsulami', 'a@hotmail.com', 'm', '1994', 1);
+
+insert into orders(id, user_id, status) values (1,1,'start');
+insert into products(id, name, price, status) values (1,'Books', 500 ,'expired');
+insert into order_products(order_id, produact_id, quantity) values (1,1,5);
+
+update countries
+set code = 1, name = 'Asser'
+where code = 1;
+
+delete products where id = 1;
+
+delete order_products where order_id = 1 and produact_id = 1;
+
+
+

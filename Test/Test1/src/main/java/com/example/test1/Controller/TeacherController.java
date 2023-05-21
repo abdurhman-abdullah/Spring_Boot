@@ -23,7 +23,7 @@ public class TeacherController {
 
     @GetMapping("/get")
     public ResponseEntity get(@RequestBody Teacher teacher){
-        if(this.teacherService.get(teacher).getId() != teacher.getId()) {
+        if(this.teacherService.get(teacher).getId() == teacher.getId()) {
             return ResponseEntity.status(400).body("Not found name");
         }
         return ResponseEntity.status(200).body(this.teacherService.get(teacher));
@@ -44,7 +44,7 @@ public class TeacherController {
         return ResponseEntity.status(200).body("Success");
     }
 
-    @PutMapping("/update")
+    @PutMapping("/update/{id}")
     public ResponseEntity update(@PathVariable int id, @RequestBody Teacher teacher, Errors errors){
         if(this.teacherService.getAllErrors(errors) != null)
             return ResponseEntity.status(400).body(this.teacherService.getAllErrors(errors));
@@ -55,11 +55,11 @@ public class TeacherController {
         return ResponseEntity.status(200).body("Success");
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity delete(@PathVariable int id){
         if(!this.teacherService.delete(id))
             return ResponseEntity.status(400).body("id Not found");
 
-        return ResponseEntity.status(200).body(this.teacherService.delete(id));
+        return ResponseEntity.status(200).body("success");
     }
 }

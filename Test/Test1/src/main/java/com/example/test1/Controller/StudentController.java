@@ -22,7 +22,7 @@ public class StudentController {
 
     @GetMapping("/get")
     public ResponseEntity get(@RequestBody Student name){
-        if(this.studentService.get(name).getName() != name.getName()) {
+        if(this.studentService.get(name) == null) {
             return ResponseEntity.status(400).body("Not found name");
         }
             return ResponseEntity.status(200).body(this.studentService.get(name));
@@ -59,6 +59,6 @@ public class StudentController {
         if(!this.studentService.delete(id))
             return ResponseEntity.status(400).body("id Not found");
 
-        return ResponseEntity.status(200).body(this.studentService.delete(id));
+        return ResponseEntity.status(200).body("Success");
     }
 }

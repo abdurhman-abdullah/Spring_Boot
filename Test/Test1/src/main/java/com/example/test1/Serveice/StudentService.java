@@ -28,7 +28,7 @@ public class StudentService {
 
     public Boolean update(int id, Student student){
         for(int i = 0; i < students.size(); i++){
-            if(students.get(i).equals(id)) {
+            if(students.get(i).getId().equals(id)) {
                 students.set(i, student);
                 return true;
             }
@@ -39,7 +39,7 @@ public class StudentService {
 
     public Boolean delete(int id){
         for(int i = 0; i < students.size(); i++){
-            if(students.get(i).equals(id))
+            if(students.get(i).getId().equals(id))
                 students.remove(i);
                 return true;
         }

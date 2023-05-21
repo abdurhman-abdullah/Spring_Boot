@@ -28,7 +28,7 @@ public class TeacherService {
 
     public Boolean update(int id, Teacher teacher){
         for(int i = 0; i < teachers.size(); i++){
-            if(teachers.get(i).equals(id)) {
+            if(Integer.parseInt(teachers.get(i).getId()) == id) {
                 teachers.set(i, teacher);
                 return true;
             }
@@ -39,7 +39,7 @@ public class TeacherService {
 
     public Boolean delete(int id){
         for(int i = 0; i < teachers.size(); i++){
-            if(teachers.get(i).equals(id))
+            if(Integer.parseInt(teachers.get(i).getId()) == id)
                 teachers.remove(i);
             return true;
         }

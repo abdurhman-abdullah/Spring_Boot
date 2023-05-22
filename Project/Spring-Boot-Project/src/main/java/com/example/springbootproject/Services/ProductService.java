@@ -1,6 +1,7 @@
 package com.example.springbootproject.Services;
 
 import com.example.springbootproject.Model.Category;
+import com.example.springbootproject.Model.Merchant;
 import com.example.springbootproject.Model.Product;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
@@ -69,11 +70,21 @@ public class ProductService {
         return null;
     }
 
+
     public String checkId(int id) {
         for (int i = 0; i < products.size(); i++) {
             if (Integer.parseInt(products.get(i).getId()) == id)
                 return "This id is exist";
         }
+        return null;
+    }
+
+    public Product get(int id){
+        if(checkId(id) != null)
+            for(int i = 0; i < products.size(); i++){
+                return products.get(i);
+            }
+
         return null;
     }
 

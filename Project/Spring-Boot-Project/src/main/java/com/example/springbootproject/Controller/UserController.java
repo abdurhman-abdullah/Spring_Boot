@@ -31,12 +31,12 @@ public class UserController {
         }
 
         if(this.userService.checkId(Integer.parseInt(user.getId())) != null){
-            return ResponseEntity.status(400).body(new ApiMessage(this.userService.checkId(Integer.parseInt(user.getId()))));
-        }
-
-        if(user.getUserName() != "Admin" || user.getUserName() != "Customer"){
             return ResponseEntity.status(400).body(new ApiMessage("BadRequest"));
         }
+
+//        if(!user.getRole()("Admin") || !user.getRole().equals("Customer")){
+//            return ResponseEntity.status(400).body(new ApiMessage("BadRequest"));
+//        }
 
         this.userService.add(user);
         return ResponseEntity.status(200).body(new ApiMessage("Success"));
@@ -60,6 +60,15 @@ public class UserController {
             return ResponseEntity.status(200).body(new ApiMessage("Success"));
         }
         return ResponseEntity.status(400).body(new ApiMessage("BadRequest"));
+    }
+
+    @PutMapping("/update/{userId}/{productId}/{merchantId}")
+    public ResponseEntity change(@PathVariable int userId,@PathVariable int productId, @PathVariable int merchantId){
+        if(this.userService.checks(userId, productId, merchantId) == "BadRequest")
+        return ResponseEntity.status(400).body(new ApiMessage("BadRequest"));
+
+        return ResponseEntity.status(200).body(new ApiMessage("Success"));
+
     }
 
     public ArrayList<String> getAllErrors(Errors errors){

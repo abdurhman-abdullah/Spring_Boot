@@ -26,7 +26,7 @@ public class MerchantStockService {
     }
 
     public void add(MerchantStock merchantStock){
-        if(getProduct(merchantStock) && getMerchant(merchantStock))
+        if(getProduct(merchantStock) != null && getMerchant(merchantStock) != null)
         merchantStocks.add(merchantStock);
     }
 
@@ -70,21 +70,23 @@ public class MerchantStockService {
         return null;
     }
 
-    public Boolean getProduct(MerchantStock merchantStock){
+    public Product getProduct(MerchantStock merchantStock){
         products = this.productService.getAll();
         for (int i = 0; i < products.size(); i++){
             if(merchantStock.getProductId().equals(products.get(i).getId()))
-                return true;
+                return products.get(i);
         }
-        return false;
+        return null;
     }
 
-    public Boolean getMerchant(MerchantStock merchantStock){
+    public Merchant getMerchant(MerchantStock merchantStock){
         merchants = this.merchantService.getAll();
         for (int i = 0; i < merchants.size(); i++){
             if(merchantStock.getMerchantId().equals(merchants.get(i).getId()))
-                return true;
+                return merchants.get(i);
         }
-        return false;
+        return null;
     }
+
+
 }

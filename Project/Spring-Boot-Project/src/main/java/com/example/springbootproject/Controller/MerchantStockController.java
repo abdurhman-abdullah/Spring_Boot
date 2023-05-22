@@ -33,11 +33,11 @@ public class MerchantStockController {
             return ResponseEntity.status(400).body(new ApiMessage(this.merchantStockService.checkId(Integer.parseInt(merchantStock.getId()))));
         }
 
-        if(!this.merchantStockService.getProduct(merchantStock)){
+        if(this.merchantStockService.getProduct(merchantStock) == null){
             return ResponseEntity.status(400).body(new ApiMessage("This productId not found"));
         }
 
-        if(!this.merchantStockService.getMerchant(merchantStock)){
+        if(this.merchantStockService.getMerchant(merchantStock) == null){
             return ResponseEntity.status(400).body(new ApiMessage("This merchantId not found"));
         }
 
@@ -55,18 +55,18 @@ public class MerchantStockController {
             return ResponseEntity.status(400).body(new ApiMessage("this id is not Exist"));
         }
 
-        if(!this.merchantStockService.getProduct(merchantStock)){
+        if(this.merchantStockService.getProduct(merchantStock) == null){
             return ResponseEntity.status(400).body(new ApiMessage("This productId not found"));
         }
 
-        if(!this.merchantStockService.getMerchant(merchantStock)){
+        if(this.merchantStockService.getMerchant(merchantStock) == null){
             return ResponseEntity.status(400).body(new ApiMessage("This merchantId not found"));
         }
 
         return ResponseEntity.status(200).body(new ApiMessage("Success"));
     }
 
-    @PutMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity delete(@PathVariable int id){
         if( this.merchantStockService.delete(id)) {
             return ResponseEntity.status(200).body(new ApiMessage("Success"));

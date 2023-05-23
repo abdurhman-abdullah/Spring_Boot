@@ -49,6 +49,19 @@ public class MerchantStockService {
         return false;
     }
 
+    public MerchantStock updateStock(int productId, int merchantId, String stock) {
+        for (int i = 0; i < merchantStocks.size(); i++) {
+            if (Integer.parseInt(merchantStocks.get(i).getProductId()) == productId &&
+                    Integer.parseInt(merchantStocks.get(i).getMerchantId()) == merchantId) {
+                merchantStocks.get(i).setStock(stock);
+                merchantStocks.set(i, merchantStocks.get(i));
+                return merchantStocks.get(i);
+            }
+        }
+        return null;
+    }
+
+
     public ArrayList<String> checkErrors(Errors errors) {
         ArrayList<String> allErrors = new ArrayList<>();
         String field = null;

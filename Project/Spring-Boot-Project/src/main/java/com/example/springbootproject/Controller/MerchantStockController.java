@@ -74,6 +74,26 @@ public class MerchantStockController {
         return ResponseEntity.status(400).body(new ApiMessage("BadRequest"));
     }
 
+
+    @PutMapping("/update/{productId}/{merchantId}/{stock}")
+    public ResponseEntity updateStock(@PathVariable int productId, @PathVariable int merchantId, @PathVariable String stock){
+
+        MerchantStock merchantStock = this.merchantStockService.updateStock(productId, merchantId, stock);
+
+        if(merchantStock == null)
+            return ResponseEntity.status(400).body(new ApiMessage("This productId not found"));
+
+        if(this.merchantStockService.getProduct(merchantStock) == null){
+            return ResponseEntity.status(400).body(new ApiMessage("This productId not found"));
+        }
+
+        if(this.merchantStockService.getMerchant(merchantStock) == null){
+            return ResponseEntity.status(400).body(new ApiMessage("This merchantId not found"));
+        }
+
+        return ResponseEntity.status(200).body(new ApiMessage("Success"));
+    }
+
     public ArrayList<String> getAllErrors(Errors errors){
         ArrayList<String> getAllErrors = this.merchantStockService.checkErrors(errors);
         return getAllErrors;

@@ -66,6 +66,7 @@ public class ProductController {
         }
         return ResponseEntity.status(400).body(new ApiMessage("BadRequest"));
     }
+
     public ArrayList<String> getAllErrors(Errors errors){
         ArrayList<String> getAllErrors = this.productService.checkErrors(errors);
         return getAllErrors;

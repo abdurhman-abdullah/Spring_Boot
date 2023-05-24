@@ -17,36 +17,37 @@ import org.hibernate.validator.constraints.Length;
 public class UserManagement {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue(generator = "id_Seq", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "id_Seq", sequenceName = "id_users ", initialValue = 1 ,allocationSize = 1)
+    private int id;
 
     @NotEmpty(message = "name cannot be null")
     @Length(min = 5, message = "name length more than 4")
     @Column(columnDefinition = "varchar(20) not null")
-    private String NAME;
+    private String name;
 
     @NotEmpty(message = "username cannot be null")
     @Length(min = 5, message = "username length more than 4")
     @Column(columnDefinition = "varchar(20) not null unique")
-    private String USERNAME;
+    private String username;
 
     @NotEmpty(message = "password cannot be null")
     @Length(min = 5, message = "password length more than 4")
     @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$", message = "password must have characters and digits ")
     @Column(columnDefinition = "varchar(20) not null")
-    private String PASSWORD;
+    private String password;
 
     @NotEmpty(message = "email cannot be null")
     @Email(message = "email must be valid")
     @Column(columnDefinition = "varchar(20) not null unique")
-    private String EMAIL;
+    private String email;
 
     @NotEmpty(message = "role cannot be null")
     @Column(columnDefinition = "varchar(20) not null check(role = 'user' or role = 'admin')")
-    private String ROLE;
+    private String role;
 
     @NotNull(message = "age cannot be null")
-    @Column(columnDefinition = "int not null")
-    private Integer AGE;
+    @Column(columnDefinition = "int")
+    private Integer age;
 
 }

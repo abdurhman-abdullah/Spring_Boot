@@ -63,10 +63,11 @@ public class UsersService {
     }
 
     public Boolean update(Integer id, UserManagement user1){
+        if(userRepository.getById(id) != null)
+            return false;
+
         UserManagement user = userRepository.getById(id);
 
-        if(user == null)
-            return false;
 
         user.setAge(user1.getAge());
         user.setPassword(user1.getPassword());
@@ -78,12 +79,12 @@ public class UsersService {
     }
 
     public Boolean delete(Integer id){
-        UserManagement user = userRepository.getById(id);
-
-        if(user == null)
+        if(userRepository.getById(id) != null)
             return false;
 
-        userRepository.save(user);
+        UserManagement user = userRepository.getById(id);
+
+        userRepository.delete(user);
         return true;
     }
 

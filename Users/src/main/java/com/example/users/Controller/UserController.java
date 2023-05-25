@@ -54,7 +54,7 @@ public class UserController {
         }
 
         if(!this.userService.checkUserName(user.getUsername()))
-           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("This userName already exists");
+           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(HttpStatus.BAD_REQUEST);
 
         if(!this.userService.checkEmail(user.getEmail()))
            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("This email already exists");

@@ -1,7 +1,11 @@
 package com.example.homework4.Services;
 
 import com.example.homework4.Excptions.ExceptionApiResponse;
+import com.example.homework4.Models.Address;
+import com.example.homework4.Models.Course;
 import com.example.homework4.Models.Teacher;
+import com.example.homework4.Repositories.AddressRepository;
+import com.example.homework4.Repositories.CourseRepository;
 import com.example.homework4.Repositories.TeacherRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,6 +18,7 @@ import java.util.List;
 public class TeacherService {
 
     private final TeacherRepository teacherRepository;
+    private final CourseRepository courseRepository;
 
     public List<Teacher> getAll(){
         return teacherRepository.findAll();
@@ -45,5 +50,20 @@ public class TeacherService {
                 orElseThrow(() -> new ExceptionApiResponse("id not found"));
         teacherRepository.delete(findTeacher);
     }
+
+    public Teacher getById(int teacher_id){
+        Teacher teacher = teacherRepository.findById(teacher_id)
+                .orElseThrow(() -> new ExceptionApiResponse("id not found"));
+
+        return teacher;
+    }
+
+    public String getByCourse(int courseId){
+        Course course = courseRepository.findById(courseId)
+                .orElseThrow(() -> new ExceptionApiResponse("id not found"));
+
+        return course.getTeacher().getName();
+    }
+
 
 }

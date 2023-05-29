@@ -18,8 +18,8 @@ public class TeacherController {
 
     @GetMapping("/getAll")
     public ResponseEntity getAll(){
-        List<Teacher> customerList= teacherService.getAll();
-        return ResponseEntity.status(200).body(customerList);
+        List<Teacher> teacherList = teacherService.getAll();
+        return ResponseEntity.status(200).body(teacherList);
     }
 
 
@@ -40,5 +40,17 @@ public class TeacherController {
         teacherService.delete(id);
         return ResponseEntity.status(200).body("teacher deleted");
 
+    }
+
+    @GetMapping("/getById/{id}")
+    public ResponseEntity getById(@PathVariable int id){
+        Teacher teacher = teacherService.getById(id);
+        return ResponseEntity.status(200).body(teacher);
+    }
+
+    @GetMapping("/getByCourse/{id}")
+    public ResponseEntity getByCourse(@PathVariable int id){
+        String teacherName = teacherService.getByCourse(id);
+        return ResponseEntity.status(200).body(teacherName);
     }
 }

@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Entity
 @AllArgsConstructor
 @Getter
@@ -27,6 +29,10 @@ public class Course {
     @JoinColumn(name = "teacher_id", referencedColumnName = "id")
     @JsonIgnore
     private Teacher teacher;
+
+    @ManyToMany
+    @JsonIgnore
+    private Set<Student> students;
 
 
 }

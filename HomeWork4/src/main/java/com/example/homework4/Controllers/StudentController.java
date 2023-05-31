@@ -9,12 +9,14 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/student")
 @RequiredArgsConstructor
 public class StudentController {
 
     private final StudentService studentService;
+//    private static final Logger Log = Logger.getLogger(StudentController.class);
     @GetMapping("/getAll")
     public ResponseEntity getAll(){
         List<Student> courseList = studentService.getAll();

@@ -8,7 +8,6 @@ import com.example.bookhospitalappointments.Models.Hospital;
 import com.example.bookhospitalappointments.Repository.AppointmentRepository;
 import com.example.bookhospitalappointments.Repository.DoctorRepository;
 import com.example.bookhospitalappointments.Repository.HospitalRepository;
-import com.example.bookhospitalappointments.Repository.PatientRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
@@ -86,7 +85,4 @@ public class DoctorService {
 
         appointmentRepository.save(appointment);
     }
-
-
-
 }
